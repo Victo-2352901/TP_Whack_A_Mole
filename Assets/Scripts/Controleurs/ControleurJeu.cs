@@ -2,26 +2,16 @@ using UnityEngine;
 
 public class ControleurJeu : MonoBehaviour
 {
-    public ControleurJeu instance;
+    public static ControleurJeu instance;
 
     private bool jeuEnCour = false;
 
     private int point = 0;
     private float temps = 60f;
 
-    [SerializeField]
-    private GameObject menuDemarrer;
-
-    [SerializeField]
-    private GameObject menuFin;
-
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        menuDemarrer.SetActive(true);
-        menuFin.SetActive(false);
         instance = this;
     }
 
@@ -31,10 +21,11 @@ public class ControleurJeu : MonoBehaviour
         if (jeuEnCour)
         {
             temps -= Time.deltaTime;
+            ControleurUI.Instance.ActualiserTemps(temps);
 
             if (temps < 0)
             {
-                
+                ControleurUI.Instance.AfficherMenuFin();    
             }
         }   
     }
@@ -42,6 +33,7 @@ public class ControleurJeu : MonoBehaviour
     public void AjouterPoint()
     {
         point += 10;
+        ControleurUI.Instance.ActualiserPoint(point);
     }
 
     public void Demarrer()
@@ -50,13 +42,19 @@ public class ControleurJeu : MonoBehaviour
         point = 0;
         jeuEnCour = true;
 
-        menuDemarrer.SetActive(false);
+        ControleurUI.Instance.CacherMenuDemarrer();
+        ControleurUI.Instance.AfficherStats();
+
+        ControleurUI.Instance.ActualiserPoint(point);
+        ControleurUI.Instance.ActualiserTemps(temps);
     }
 
     public void Fin()
     {
         jeuEnCour = false;
-        menuFin.SetActive(true);
+
+        ControleurUI.Instance.CacherStats();
+        ControleurUI.Instance.AfficherMenuFin();
 
     }
 }
