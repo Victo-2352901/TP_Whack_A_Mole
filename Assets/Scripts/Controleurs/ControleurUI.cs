@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ControleurUI : MonoBehaviour
@@ -15,6 +16,17 @@ public class ControleurUI : MonoBehaviour
     private GameObject statistique;
 
 
+    [SerializeField]
+    private TextMeshProUGUI textePoint;
+
+    [SerializeField]
+    private TextMeshProUGUI texteTemps;
+
+    [SerializeField]
+    private TextMeshProUGUI texteScoreFinal;
+
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,6 +35,8 @@ public class ControleurUI : MonoBehaviour
         AfficherMenuDemarrer();
         CacherMenuFin();
         CacherStats();
+        textePoint.text = "Point : 0";
+        textePoint.text = "Temps : 60s";
     }
 
 
@@ -52,9 +66,11 @@ public class ControleurUI : MonoBehaviour
     /// <summary>
     /// Affiche le menu de fin
     /// </summary>
-    public void AfficherMenuFin()
+    public void AfficherMenuFin(int points)
     {
         menuFin.SetActive(true);
+
+        texteScoreFinal.text = "Score final : " + points;
     }
 
     /// <summary>
@@ -73,7 +89,7 @@ public class ControleurUI : MonoBehaviour
     /// </summary>
     public void AfficherStats()
     {
-
+        statistique.SetActive(true);
     }
 
 
@@ -81,8 +97,8 @@ public class ControleurUI : MonoBehaviour
     /// Cache les éléments UI des statistiques
     /// </summary>
     public void CacherStats() 
-    { 
-    
+    {
+        statistique.SetActive(false);
     }
 
     /// <summary>
@@ -91,7 +107,7 @@ public class ControleurUI : MonoBehaviour
     /// <param name="points">Le nombre de point du joueur</param>
     public void ActualiserPoint(int points)
     {
-        
+        textePoint.text = "Point: " + points;
     }
 
     /// <summary>
@@ -100,7 +116,7 @@ public class ControleurUI : MonoBehaviour
     /// <param name="tempsRestant">Le temps restant</param>
     public void ActualiserTemps(float tempsRestant)
     {
-
+        texteTemps.text = "Temps restant : " + tempsRestant + "s";
     }
 }
 

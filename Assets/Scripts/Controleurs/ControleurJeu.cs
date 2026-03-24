@@ -6,7 +6,7 @@ public class ControleurJeu : MonoBehaviour
 
     private bool jeuEnCour = false;
 
-    private int point = 0;
+    private int points = 0;
     private float temps = 60f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,27 +25,27 @@ public class ControleurJeu : MonoBehaviour
 
             if (temps < 0)
             {
-                ControleurUI.Instance.AfficherMenuFin();    
+                Fin();    
             }
         }   
     }
     
     public void AjouterPoint()
     {
-        point += 10;
-        ControleurUI.Instance.ActualiserPoint(point);
+        points += 10;
+        ControleurUI.Instance.ActualiserPoint(points);
     }
 
     public void Demarrer()
     {
         temps = 60f;
-        point = 0;
+        points = 0;
         jeuEnCour = true;
 
         ControleurUI.Instance.CacherMenuDemarrer();
         ControleurUI.Instance.AfficherStats();
 
-        ControleurUI.Instance.ActualiserPoint(point);
+        ControleurUI.Instance.ActualiserPoint(points);
         ControleurUI.Instance.ActualiserTemps(temps);
     }
 
@@ -54,7 +54,7 @@ public class ControleurJeu : MonoBehaviour
         jeuEnCour = false;
 
         ControleurUI.Instance.CacherStats();
-        ControleurUI.Instance.AfficherMenuFin();
+        ControleurUI.Instance.AfficherMenuFin(points);
 
     }
 }
