@@ -26,7 +26,9 @@ public class ControleurJeu : MonoBehaviour
         Instance = this;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// S'occupe du bon fonctionnement du jeu
+    /// </summary>
     void Update()
     {
         if (jeuEnCour)
@@ -51,12 +53,18 @@ public class ControleurJeu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Ajoute des points au joueurs et actualise le UI
+    /// </summary>
     public void AjouterPoint()
     {
         points += 10;
         ControleurUI.Instance.ActualiserPoint(points);
     }
 
+    /// <summary>
+    /// Remet les bonnes données pour le début du jeu
+    /// </summary>
     public void Demarrer()
     {
         temps = 60f;
@@ -70,6 +78,10 @@ public class ControleurJeu : MonoBehaviour
         ControleurUI.Instance.ActualiserTemps(temps);
     }
 
+
+    /// <summary>
+    /// Arrête le jeu et affiche le menu de fin
+    /// </summary>
     public void Fin()
     {
         jeuEnCour = false;
@@ -78,6 +90,10 @@ public class ControleurJeu : MonoBehaviour
         ControleurUI.Instance.AfficherMenuFin(points);
 
     }
+
+    /// <summary>
+    /// Si aucune cible est actuelle placer, fait apparaitre une cible à un endroit aléatoire pendant un bref moment
+    /// </summary>
     void SpawnCible()
     {
         if (cibleActuelle == null)
@@ -91,6 +107,11 @@ public class ControleurJeu : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Détruis la cible automatiquement après un bref délai
+    /// </summary>
+    /// <param name="cible">La cible actuelle</param>
+    /// <returns>Un temps d'attente</returns>
     public IEnumerator AutoDetruire(GameObject cible)
     {
         yield return new WaitForSeconds(1);
