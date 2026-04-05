@@ -9,9 +9,9 @@ public class Marteau : MonoBehaviour
     /// <param name="collision">L'objet avec lequel le marteau a fais collision</param>
     private void OnCollisionEnter(Collision collision)
     {
-        throw new System.Exception("Il reste a faire l'ajout de point");
         if (collision.gameObject.CompareTag("Cible"))
         {
+            ControleurJeu.Instance.AjouterPoint();
             Destroy(collision.gameObject);
         }
     }

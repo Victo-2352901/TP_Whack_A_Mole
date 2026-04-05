@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ControleurJeu : MonoBehaviour
 {
-    public static ControleurJeu instance;
+    public static ControleurJeu Instance;
 
     private bool jeuEnCour = false;
 
@@ -23,7 +23,7 @@ public class ControleurJeu : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        instance = this;
+        Instance = this;
     }
 
     // Update is called once per frame
