@@ -98,6 +98,7 @@ public class ControleurJeu : MonoBehaviour
     {
         if (cibleActuelle == null)
         {
+            // Random trouvé ici https://docs.unity3d.com/ScriptReference/Random.Range.html
             int index = Random.Range(0, spawner.Length);
             Transform pointSpawn = spawner[index].transform;
 
@@ -108,7 +109,7 @@ public class ControleurJeu : MonoBehaviour
     }
 
     /// <summary>
-    /// Détruis la cible automatiquement après un bref délai
+    /// Détruit la cible automatiquement après un bref délai
     /// </summary>
     /// <param name="cible">La cible actuelle</param>
     /// <returns>Un temps d'attente</returns>

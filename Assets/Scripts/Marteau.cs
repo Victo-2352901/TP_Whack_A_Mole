@@ -3,11 +3,17 @@ using UnityEngine.Audio;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
+/// <summary>
+/// Ce script est inspiré des notes de cours. 
+/// </summary>
 public class Marteau : MonoBehaviour
 {
 
 
     private XRGrabInteractable grabInteractable;
+
+    [SerializeField]
+    private AudioSource audioSource;
 
 
     [SerializeField] private float amplitudeGrab = 0.5f;
@@ -61,6 +67,8 @@ public class Marteau : MonoBehaviour
     {
         // Récupérer le contrôleur depuis l'interactor
         var controller = args.interactorObject.transform.GetComponent<XRBaseController>();
+
+        audioSource.Play();
 
         controller.SendHapticImpulse(amplitudeGrab, dureeGrab);
     }
