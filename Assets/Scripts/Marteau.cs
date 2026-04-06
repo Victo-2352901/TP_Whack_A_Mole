@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using static UnityEngine.Rendering.GPUSort;
 
 /// <summary>
 /// Ce script est inspiré des notes de cours. 
@@ -18,6 +19,9 @@ public class Marteau : MonoBehaviour
 
     [SerializeField] private float amplitudeGrab = 0.5f;
     [SerializeField] private float dureeGrab = 0.1f;
+
+    private XRBaseController controlleur;
+
     /// <summary>
     /// 
     /// </summary>
@@ -52,6 +56,9 @@ public class Marteau : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Cible"))
         {
+            collision.gameObject.tag = "DejaTouche";
+
+            JouerVibrationCible();
             ControleurJeu.Instance.AjouterPoint();
             Destroy(collision.gameObject);
         }
@@ -66,11 +73,11 @@ public class Marteau : MonoBehaviour
     private void OnGrabEntered(SelectEnterEventArgs args)
     {
         // Récupérer le contrôleur depuis l'interactor
-        var controller = args.interactorObject.transform.GetComponent<XRBaseController>();
+        controlleur = args.interactorObject.transform.GetComponent<XRBaseController>();
 
         audioSource.Play();
 
-        controller.SendHapticImpulse(amplitudeGrab, dureeGrab);
+        controlleur.SendHapticImpulse(amplitudeGrab, dureeGrab);
     }
 
 
@@ -81,8 +88,18 @@ public class Marteau : MonoBehaviour
     private void OnGrabExited(SelectExitEventArgs args)
     {
         // Vibration plus courte et moins forte au relâchement
-        var controller = args.interactorObject.transform.GetComponent<XRBaseController>();
+        controlleur = args.interactorObject.transform.GetComponent<XRBaseController>();
 
-        controller.SendHapticImpulse(amplitudeGrab * 0.3f, dureeGrab * 0.5f);
+        controlleur.SendHapticImpulse(amplitudeGrab * 0.3f, dureeGrab * 0.5f);
+
+        controlleur = null;
+    }
+
+    private void JouerVibrationCible()
+    {
+        if (controlleur != null)
+        {
+            controlleur.SendHapticImpulse(amplitudeGrab * 1f, dureeGrab * 0.3f);
+        }
     }
 }

@@ -36,7 +36,7 @@ public class ControleurUI : MonoBehaviour
         CacherMenuFin();
         CacherStats();
         textePoint.text = "Point : 0";
-        textePoint.text = "Temps : 60s";
+        texteTemps.text = "Temps : 60s";
     }
 
 

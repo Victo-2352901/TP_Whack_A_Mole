@@ -70,7 +70,7 @@ public class ControleurJeu : MonoBehaviour
         temps = 60f;
         points = 0;
         jeuEnCour = true;
-
+        ControleurUI.Instance.CacherMenuFin();
         ControleurUI.Instance.CacherMenuDemarrer();
         ControleurUI.Instance.AfficherStats();
 
