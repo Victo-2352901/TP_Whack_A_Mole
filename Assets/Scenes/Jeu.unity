@@ -2447,7 +2447,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6098544487684251618, guid: 73823a4d6cbec2241a54c470075bb475, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1981970368}
   m_SourcePrefab: {fileID: 100100000, guid: 73823a4d6cbec2241a54c470075bb475, type: 3}
 --- !u!1 &1456675097
 GameObject:
@@ -2599,6 +2602,31 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18ddb545287c546e19cc77dc9fbb2189, type: 3}
+--- !u!1 &1981970363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6098544487684251618, guid: 73823a4d6cbec2241a54c470075bb475, type: 3}
+  m_PrefabInstance: {fileID: 1444519600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1981970364 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5271604521680791899, guid: 73823a4d6cbec2241a54c470075bb475, type: 3}
+  m_PrefabInstance: {fileID: 1444519600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1981970368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981970363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb058fe126edb845a2521700fef3851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Marteau
+  audioSource: {fileID: 1981970364}
+  amplitudeGrab: 0.5
+  dureeGrab: 0.1
 --- !u!1 &2109100435
 GameObject:
   m_ObjectHideFlags: 0
