@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControleurJeu : MonoBehaviour
 {
@@ -88,7 +89,15 @@ public class ControleurJeu : MonoBehaviour
 
         ControleurUI.Instance.CacherStats();
         ControleurUI.Instance.AfficherMenuFin(points);
+    }
 
+    /// <summary>
+    /// Recharge la scène de démarrage
+    /// Provient des notes de cour
+    /// </summary>
+    public void Rejouer()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>

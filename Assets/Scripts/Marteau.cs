@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -16,11 +17,19 @@ public class Marteau : MonoBehaviour
     [SerializeField]
     private AudioSource audioSource;
 
+    [SerializeField]
+    private GameObject cube;
+
+    [SerializeField]
+    private AudioClip[] sons;
+
 
     [SerializeField] private float amplitudeGrab = 0.5f;
     [SerializeField] private float dureeGrab = 0.1f;
 
     private XRBaseController controlleur;
+
+    bool marteauAttrape = false;
 
     /// <summary>
     /// 
@@ -72,9 +81,15 @@ public class Marteau : MonoBehaviour
     /// <param name="args">Information de l'objet qui contient le component xr grab</param>
     private void OnGrabEntered(SelectEnterEventArgs args)
     {
+        marteauAttrape = true;
+        if (marteauAttrape)
+        {
+            cube.SetActive(false);
+        }
         // Récupérer le contrôleur depuis l'interactor
         controlleur = args.interactorObject.transform.GetComponent<XRBaseController>();
 
+        audioSource.clip = sons[0];
         audioSource.Play();
 
         controlleur.SendHapticImpulse(amplitudeGrab, dureeGrab);
@@ -101,5 +116,12 @@ public class Marteau : MonoBehaviour
         {
             controlleur.SendHapticImpulse(amplitudeGrab * 1f, dureeGrab * 0.3f);
         }
+    }
+
+    private IEnumerator JouerSonDestruction()
+    {
+        audioSource.clip = sons[1];
+        audioSource.Play();
+        yield return new WaitForSeconds(sons[1].length);
     }
 }
