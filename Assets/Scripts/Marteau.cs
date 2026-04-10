@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using static UnityEngine.Rendering.GPUSort;
 
 /// <summary>
@@ -27,7 +28,8 @@ public class Marteau : MonoBehaviour
     [SerializeField] private float amplitudeGrab = 0.5f;
     [SerializeField] private float dureeGrab = 0.1f;
 
-    private XRBaseController controlleur;
+    /// https://www.youtube.com/watch?v=LKq45FNopYU&t=102s
+    private XRBaseInputInteractor controlleur;
 
     bool marteauAttrape = false;
 
@@ -68,6 +70,7 @@ public class Marteau : MonoBehaviour
             collision.gameObject.tag = "DejaTouche";
 
             JouerVibrationCible();
+            StartCoroutine(JouerSonDestruction());
             ControleurJeu.Instance.AjouterPoint();
             Destroy(collision.gameObject);
         }
@@ -87,12 +90,12 @@ public class Marteau : MonoBehaviour
             cube.SetActive(false);
         }
         // Récupérer le contrôleur depuis l'interactor
-        controlleur = args.interactorObject.transform.GetComponent<XRBaseController>();
+        controlleur = args.interactorObject.transform.GetComponent<XRBaseInputInteractor>();
 
         audioSource.clip = sons[0];
         audioSource.Play();
 
-        controlleur.SendHapticImpulse(amplitudeGrab, dureeGrab);
+        controlleur.SendHapticImpulse(1, 1);
     }
 
 
@@ -103,7 +106,7 @@ public class Marteau : MonoBehaviour
     private void OnGrabExited(SelectExitEventArgs args)
     {
         // Vibration plus courte et moins forte au relâchement
-        controlleur = args.interactorObject.transform.GetComponent<XRBaseController>();
+        controlleur = args.interactorObject.transform.GetComponent<XRBaseInputInteractor>();
 
         controlleur.SendHapticImpulse(amplitudeGrab * 0.3f, dureeGrab * 0.5f);
 
