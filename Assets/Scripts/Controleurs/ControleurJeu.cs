@@ -117,6 +117,11 @@ public class ControleurJeu : MonoBehaviour
         };
     }
 
+    public void ChangerCibleActuelle()
+    {
+        cibleActuelle = null;
+    }
+
     /// <summary>
     /// Détruit la cible automatiquement après un bref délai
     /// </summary>

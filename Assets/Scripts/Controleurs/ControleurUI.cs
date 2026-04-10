@@ -116,7 +116,7 @@ public class ControleurUI : MonoBehaviour
     /// <param name="tempsRestant">Le temps restant</param>
     public void ActualiserTemps(float tempsRestant)
     {
-        texteTemps.text = "Temps restant : " + tempsRestant + "s";
+        texteTemps.text = "Temps restant : " + Mathf.FloorToInt(tempsRestant % 60f) + "s";
     }
 }
 

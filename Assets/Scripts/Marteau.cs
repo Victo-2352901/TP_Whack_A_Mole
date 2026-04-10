@@ -70,9 +70,10 @@ public class Marteau : MonoBehaviour
             collision.gameObject.tag = "DejaTouche";
 
             JouerVibrationCible();
-            StartCoroutine(JouerSonDestruction());
+            JouerSonDestruction();
             ControleurJeu.Instance.AjouterPoint();
             Destroy(collision.gameObject);
+            ControleurJeu.Instance.ChangerCibleActuelle();
         }
     }
 
@@ -113,6 +114,9 @@ public class Marteau : MonoBehaviour
         controlleur = null;
     }
 
+    /// <summary>
+    /// Envoi une vibration dans le controleur
+    /// </summary>
     private void JouerVibrationCible()
     {
         if (controlleur != null)
@@ -121,10 +125,13 @@ public class Marteau : MonoBehaviour
         }
     }
 
-    private IEnumerator JouerSonDestruction()
+    /// <summary>
+    /// Joue le son de destruction 
+    /// </summary>
+    /// <returns>Le temps d'attente de la longueur du son</returns>
+    private void JouerSonDestruction()
     {
         audioSource.clip = sons[1];
         audioSource.Play();
-        yield return new WaitForSeconds(sons[1].length);
     }
 }
