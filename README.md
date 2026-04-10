@@ -1,5 +1,5 @@
 ##   Titre du projet   ##
-TP_TicTacToe
+TP_Whack_A_Mole
 
 
 ##  Description ##
